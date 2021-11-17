@@ -62,7 +62,7 @@ app.get('/app/:math', (req, res) => {
     result = Number(value1) * Number(value2);
   }
 
-  res.send(`Math ${result}`);
+  res.send(`Math ${typeof result === 'number' ? result.toFixed(2) : result}`);
 
   //http://localhost:3000/app/add?value1=10&value2=5
   //http://localhost:3000/app/subtract?value1=10&value2=5

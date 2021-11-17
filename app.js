@@ -47,21 +47,22 @@ app.all('/methods/:idCountry/:idLanguage', (req, res) => {
 app.get('/app/:math', (req, res) => {
   console.log(req.params);
   console.log(req.query);
-  const { mathValue } = req.params;
-  const { queryValue } = req.query;
+  const { math } = req.params;
+  const { value1, value2 } = req.query;
 
-  let matm = '';
-  if (req.params.math === 'add') {
-    matm = Number(req.query.value1) + Number(req.query.value2);
+  let result = null;
+
+  if (math === 'add') {
+    result = Number(value1) + Number(value2);
   }
-  if (req.params.math === 'subtract') {
-    matm = Number(req.query.value1) - Number(req.query.value2);
+  if (math === 'subtract') {
+    result = Number(value1) - Number(value2);
   }
-  if (req.params.math === 'multiply') {
-    matm = Number(req.query.value1) * Number(req.query.value2);
+  if (math === 'multiply') {
+    result = Number(value1) * Number(value2);
   }
 
-  res.send(`Math ${matm}`);
+  res.send(`Math ${result}`);
 
   //http://localhost:3000/app/add?value1=10&value2=5
   //http://localhost:3000/app/subtract?value1=10&value2=5

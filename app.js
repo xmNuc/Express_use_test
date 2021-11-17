@@ -26,10 +26,46 @@ app.all('/methods', (req, res) => {
   console.log(req.protocol);
   console.log(req.secure);
   console.log(req.hostname);
+  console.log(req.query);
+  console.log(req.query.as);
+  console.log(req.params);
 
   res.send(
-    `Methods ${req.method}, ${req.ips}, ${req.ip}, ${req.path}, ${req.url}, ${req.originalUrl}, ${req.protocol}, ${req.secure}, ${req.hostname}`
+    `Methods ${req.method}, ${req.ips}, ${req.ip}, ${req.path}, 
+    ${req.url}, ${req.originalUrl}, ${req.protocol}, ${req.secure}, ${req.hostname}, ${req.query}`
   );
+});
+
+app.all('/methods/:idCountry/:idLanguage', (req, res) => {
+  console.log(req.params);
+  const { idCountry, idLanguage } = req.params;
+
+  res.send(
+    `Methods: ${req.params}, Country ${idCountry}, language ${idLanguage}`
+  );
+});
+app.get('/app/:math', (req, res) => {
+  console.log(req.params);
+  console.log(req.query);
+  const { mathValue } = req.params;
+  const { queryValue } = req.query;
+
+  let matm = '';
+  if (req.params.math === 'add') {
+    matm = Number(req.query.value1) + Number(req.query.value2);
+  }
+  if (req.params.math === 'subtract') {
+    matm = Number(req.query.value1) - Number(req.query.value2);
+  }
+  if (req.params.math === 'multiply') {
+    matm = Number(req.query.value1) * Number(req.query.value2);
+  }
+
+  res.send(`Math ${matm}`);
+
+  //http://localhost:3000/app/add?value1=10&value2=5
+  //http://localhost:3000/app/subtract?value1=10&value2=5
+  //http://localhost:3000/app/multiply?value1=10&value2=5
 });
 
 app.listen(port, host, () =>
